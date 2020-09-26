@@ -22,6 +22,9 @@ const memberSchema = new mongoose.Schema({
   },
   otp: {
     type: Number,
+  },otp_verified: {
+    type: Boolean,
+    default: false,
   },
   emailVerified: {
     type: Boolean,
