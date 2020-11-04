@@ -2,23 +2,23 @@ const nodemailer = require("nodemailer");
 
 const OTP = Math.floor(100000 + Math.random() * 900000);
 
-const sendMail = (x) => {
+const sendMail = (User) => {
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    service: process.env.NODEMAILER_SERVICE,
     auth: {
-      user: "jacobit818@gmail.com",
-      pass: "test@123456",
+      user: process.env.NODEMAILER_EMAIL,
+      pass: process.env.NODEMAILER_PASSWORD,
     },
   });
 
   const mailOptions = {
-    from: "raj.albiorix@gmail.com",
-    to: x.email,
-    subject: "Verify Your Account",
-    text: `Dear ${x.name}
-            We Received a request to Change Your Password
-            Your OTP:${OTP}
-            Please Go to Website And Verify OTP`,
+    from: process.env.NODEMAILER_EMAIL,
+    to: User.email,
+    subject: "Verify Your Email",
+    text: `Dear ${User.name}
+           We Received a request to Change Your Password
+           Your OTP:${OTP}
+           Please Go to App And Verify OTP`,
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
